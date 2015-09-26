@@ -1,0 +1,58 @@
+<!doctype html>
+<html ng-app="EsConnector">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
+      <script src="bower_components/jquery/dist/jquery.min.js"></script>
+      <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular-youtube-mb/dist/angular-youtube-embed.min.js"></script>
+    <script src="bower_components/OnsenUI/build/js/onsenui_all.min.js"></script>
+    <script src="elasticsearch.angular.js"></script>
+    <script src="es_connect.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+      <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="bower_components/OnsenUI/build/css/ionicons/css/ionicons.min.css">
+      <link rel="stylesheet" type="text/css" href="bower_components/OnsenUI/build/css/onsen-css-components.css">
+      <link rel="stylesheet" href="https://cdn.rawgit.com/OnsenUI/OnsenUI/1.3.4/build/css/onsenui.css">
+  </head>
+  <body>
+    <div ng-controller="QueryController">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+                    <input type="text" class="form-control" placeholder="Search for...">
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+    <div>
+        <youtube-video video-url="url"></youtube-video>
+        <!--table>
+          <tr ng-repeat="item in hits">
+          <td>{{item['_source']['name']}}</td></tr>
+        </table-->
+        <ons-modal var="modal" ng-click="youtube.player.stopVideo(); modal.hide();">
+            <div id="player">
+                <div id="placeholder" style="width: 100%"></div>
+            </div>
+        </ons-modal>
+
+        <ons-tabbar>
+            <ons-tab
+                    page="partials/search.html" persistent no-reload active="true" icon="fa fa-search" label="Search">
+            </ons-tab>
+            <ons-tab
+                    page="html/history.html" persistent no-reload icon="fa fa-history" label="History">
+            </ons-tab>
+        </ons-tabbar>
+    
+
+    </div>
+    <br>
+    </body>
+</html>

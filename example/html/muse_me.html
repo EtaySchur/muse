@@ -1,0 +1,30 @@
+<ons-page>
+    <ons-toolbar style="position: fixed;" fixed-style>
+        <div class="center youtube-toolbar">Onsen UI YouTube - History</div>
+    </ons-toolbar>
+    <ons-list>
+        <ons-list-item modifier="tappable" class="list-item-container" ng-repeat="video in allUserWithVideos track by $index" ng-click="modal.show(); launch(video._source.liveVideo, false)">
+            <ons-row>
+                <ons-col width="95px">
+                    <img class="thumbnail" ng-src="{{ video._source.liveVideo.thumbnail }}">
+                </ons-col>
+                <ons-col>
+                    <div class="title">
+                        {{ video._source.liveVideo.title }}
+                    </div>
+                    <div class="user">
+                        <ons-icon icon="fa fa-user"><span style="font-size: 12px"> {{ video._source.liveVideo.author ? video._source.liveVideo.author : "Anonymous" }}</span></ons-icon>
+                    </div>
+                    <div class="desc">
+                        {{ video._source.liveVideo.description }}
+                    </div>
+                    <div class="desc">
+                        {{ video._source.name }}
+                    </div>
+
+                </ons-col>
+                <ons-col width="40px"></ons-col>
+            </ons-row>
+        </ons-list-item>
+    </ons-list>
+</ons-page>

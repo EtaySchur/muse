@@ -1,0 +1,34 @@
+<ion-view view-title="Dashboard">
+  <ion-content class="padding">
+      <div  id="player">
+          <div id="placeholder" style="width: 60%"></div>
+      </div>
+      <!--div class="list">
+          <a ng-repeat="video in allUserWithVideos track by $index" class="item item-thumbnail-left">
+              <img ng-src="{{ video._source.liveVideo.thumbnail }}">
+              <h2>{{video._source.liveVideo.title}}</h2>
+              <p>{{video._source.liveVideo.description}}</p>
+              <button ng-click="launch(video._source.liveVideo, true)" class="button button-outline button-positive">
+                  <i class="icon ion-play"></i>
+              </button>
+              <button ng-hide="youtube.player.state == 'pause'" ng-click="youtube.player.pauseVideo();youtube.player.state = 'pause'" class="button button-outline button-positive">
+                  <i class="icon ion-pause"></i>
+              </button>
+              <button ng-show="youtube.player.state == 'pause'" ng-click="youtube.player.playVideo();youtube.player.state = 'playing'" class="button button-outline button-positive">
+                  <i class="icon ion-pause"></i>
+              </button>
+              <button ng-class="{'button-outline': !isFavo(video._source.liveVideo)}" ng-click="addVideoToFav(video._source.liveVideo)" class="button  button-positive">
+                  <i class="icon  ion-android-star"></i>
+              </button>
+
+          </a>
+      </div-->
+      <div class='circle-container'>
+          <a  ng-click="launch(video._source.liveVideo, true)" class='deg{{getImageDegree($index)}}' ng-repeat="video in allUserWithVideos track by $index" class='center'>
+
+              <img class="circledVideo" ng-src="{{ video._source.liveVideo.thumbnail }}">
+
+          </a>
+      </div>
+  </ion-content>
+</ion-view>
