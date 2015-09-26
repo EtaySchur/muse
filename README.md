@@ -2,3 +2,4 @@ This is meant to be a gentle introduction to combining AngularJS and Elasticsear
 
 **Behold the "Hello World" of AngularJS / Elasticsearch**
 # muse
+# muse
