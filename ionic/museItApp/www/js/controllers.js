@@ -19,7 +19,6 @@ angular.module('starter.controllers', [])
         }
 
         $scope.getImageDegree = function(index){
-                console.log(360 / $rootScope.allUserWithVideos.length * index)
                 return 360 / $rootScope.allUserWithVideos.length * index;
         }
 
