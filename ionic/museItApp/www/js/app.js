@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 'elasticsearch'   , 'ui.router'])
+var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 'elasticsearch'   , 'ui.router' ])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -97,7 +97,7 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
 app.config( function ($httpProvider) {
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
-
+/*
 app.run(function () {
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
@@ -105,7 +105,66 @@ app.run(function () {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     console.log("running you tube script");
 });
+*/
 
 app.service('es', function (esFactory) {
     return esFactory({ host: 'localhost:9200' });
+});
+
+app.directive('youtube', function($window , $rootScope) {
+    return {
+        restrict: "E",
+
+        scope: {
+            height:   "@",
+            width:    "@",
+            videoId:  "@"
+        },
+
+        template: '<div></div>',
+
+        link: function(scope, element) {
+            var tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            $rootScope.$on('changeVideo' , function(event , data){
+               console.log("BROADCASTING ",data);
+                scope.videoid = data.id;
+                player.cueVideoById(scope.videoid);
+            });
+
+            var player;
+
+            scope.$watch('videoid', function(newValue, oldValue) {
+                if (newValue == oldValue) {
+                    return;
+                }
+
+                player.cueVideoById(scope.videoid);
+
+            });
+
+            $window.onYouTubeIframeAPIReady = function() {
+                player = new YT.Player(element.children()[0], {
+
+                    playerVars: {
+                        autoplay: 1,
+                        html5: 1,
+                        theme: "light",
+                        modesbranding: 0,
+                        color: "white",
+                        iv_load_policy: 3,
+                        showinfo: 1,
+                        controls: 1,
+                    },
+
+                    height: scope.height,
+                    width: scope.width,
+                    videoId: scope.videoid
+                });
+            };
+        },
+    }
 });

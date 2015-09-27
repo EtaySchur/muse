@@ -23,7 +23,7 @@ angular.module('starter.controllers', [])
         }
     })
 
-    .controller('MainCtrl', function ($scope, $ionicModal, ElasticSearchService, $rootScope, VideosService, $log, $location) {
+    .controller('MainCtrl', function ($scope, $ionicModal, ElasticSearchService, $rootScope, $log, $location) {
         $scope.trustSrc = function(src) {
             return $sce.trustAsResourceUrl(src);
         }
@@ -137,30 +137,7 @@ angular.module('starter.controllers', [])
             return 360 / $rootScope.rangedVideos.length * index;
         }
 
-        $scope.launch = function (video, archive) {
-            $rootScope.currentUser.liveVideo = video;
-            /*
-             if(VideosService.getYoutube().state ==='playing'){
-             VideosService.getYoutube().player.stopVideo()
-             }
-             */
 
-
-//            ElasticSearchService.updateObject($rootScope.currentUser).then(function(result){
-//                console.log("Update live video ",result);
-//            });
-
-            $rootScope.currentParseUser.set('liveVideo', video);
-            $rootScope.currentParseUser.save();
-            console.log("current parse user UPDATED ? ", $rootScope.currentParseUser);
-            console.log("Lunching Video ", video);
-            VideosService.launchPlayer(video.id, video.title);
-            $scope.playerState = 'playing';
-            if (archive) {
-                VideosService.archiveVideo(video);
-            }
-            $log.info('Launched id:' + video.id + ' and title:' + video.title);
-        };
 
 
     })
@@ -180,16 +157,49 @@ angular.module('starter.controllers', [])
         $scope.loading = false;
 
 
+        $scope.launch = function (video, archive) {
+            $rootScope.currentUser.liveVideo = video;
+            /*
+             if(VideosService.getYoutube().state ==='playing'){
+             VideosService.getYoutube().player.stopVideo()
+             }
+             */
+
+
+//            ElasticSearchService.updateObject($rootScope.currentUser).then(function(result){
+//                console.log("Update live video ",result);
+//            });
+
+
+            console.log("current parse user UPDATED ? ", $rootScope.currentParseUser);
+            console.log("Lunching Video ", video);
+            VideosService.launchPlayer(video.id, video.title);
+            // $scope.playerState = 'playing';
+            if (archive) {
+                VideosService.archiveVideo(video);
+            }
+            $rootScope.currentParseUser.set('liveVideo', video);
+            $rootScope.currentParseUser.save();
+            console.log('Launched id:' + video.id + ' and title:' + video.title);
+            //$log.info('Launched id:' + video.id + ' and title:' + video.title);
+        };
+
         function init() {
             $scope.query = 'guy gerber';
             $scope.youtube = VideosService.getYoutube();
             $scope.results = VideosService.getResults();
+            $scope.currentVideo = $scope.results[0];
+            $rootScope.$broadcast('changeVideo' , $scope.currentVideo);
             console.log("This is the resultssss....", $scope.youtube);
             $scope.history = VideosService.getHistory();
         }
 
         init();
-
+    $scope.setCurrentVideo = function(video){
+        $scope.currentVideo = video;
+        $rootScope.$broadcast('changeVideo' , $scope.currentVideo);
+        console.log("current video , ",$scope.currentVideo);
+    }
         $scope.addVideoToFav = function (video) {
             var found = false;
             var index = null;

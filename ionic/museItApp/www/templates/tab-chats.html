@@ -1,5 +1,6 @@
 <ion-view view-title="Search">
   <ion-content>
+
       <div class="bar bar-header item-input-inset">
           <label class="item-input-wrapper">
               <i class="icon ion-ios-search placeholder-icon"></i>
@@ -9,14 +10,15 @@
               Search
           </button>
       </div>
-
+      <youtube width="640" height="390" videoid="{{currentVideo.id}}"></youtube>
       <div class="list">
 
           <a ng-repeat="video in results track by $index" class="item item-thumbnail-left">
+              <!--youtube id="{{current.id}}" width="{{width}}" height="{{height}}" current-time="time" controls="{{current.showControls}}"></youtube-->
               <img ng-src="{{ video.thumbnail }}">
               <h2>{{video.title}}</h2>
               <p>{{video.description}}</p>
-              <button ng-click="launch(video, true)" class="button button-outline button-positive">
+              <button  ng-click="setCurrentVideo(video)" class="button button-outline button-positive">
                   <i class="icon ion-play"></i>
               </button>
               <button ng-hide="youtube.player.state == 'pause'" ng-click="youtube.player.pauseVideo();youtube.player.state = 'pause'" class="button button-outline button-positive">
