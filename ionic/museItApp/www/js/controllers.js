@@ -7,30 +7,30 @@ angular.module('starter.controllers', [])
         $scope.userName = "Fuad The 1st";
         $scope.password = "Fuad";
 
-//        $rootScope.parseLogin = function (userName, password) {
-//            Parse.User.logIn(userName, password, {
-//                success: function (user) {
-//                    $rootScope.currentParseUser = user;
-//                    $rootScope.initCurrentUserData();
-//                    $location.url('/tab/chats');
-//
-//                },
-//                error: function (user, error) {
-//                    console.log("Login Error ? ", error);
-//                }
-//            });
-//
-//        }
+        $scope.parseLogin = function (userName, password) {
+            Parse.User.logIn(userName, password, {
+                success: function (user) {
+                    $rootScope.currentParseUser = user;
+                    $rootScope.initCurrentUserData();
+                    $location.url('/tab/chats');
+
+                },
+                error: function (user, error) {
+                    console.log("Login Error ? ", error);
+                }
+            });
+
+        }
     })
 
     .controller('MainCtrl', function ($scope, $ionicModal, ElasticSearchService, $rootScope, VideosService, $log, $location) {
 
 
-//        ElasticSearchService.login("FuadUser35", "avinimni").then(function (result) {
-//            console.log("This is my login result ", result);
-//            console.log("User Log in ", $rootScope.currentUser);
-//            $scope.updateVideos();
-//        });
+        ElasticSearchService.login("FuadUser35", "avinimni").then(function (result) {
+            console.log("This is my login result ", result);
+            console.log("User Log in ", $rootScope.currentUser);
+            $scope.updateVideos();
+        });
 
         $rootScope.initCurrentUserData = function () {
             if (navigator.geolocation) {
@@ -89,24 +89,8 @@ angular.module('starter.controllers', [])
             $rootScope.initCurrentUserData();
             console.log("live video ? ", currentUser.get("liveVideo"));
         } else {
-           // console.log("Stating ? 1?!?!?!?!?!??!?!!?");
-           // $location.url('/login');
-            $rootScope.parseLogin("Fuad The 1st" , "Fuad");
-        }
-
-        $rootScope.parseLogin = function (userName, password) {
-            Parse.User.logIn(userName, password, {
-                success: function (user) {
-                    $rootScope.currentParseUser = user;
-                    $rootScope.initCurrentUserData();
-                    //$location.url('/tab/chats');
-
-                },
-                error: function (user, error) {
-                    console.log("Login Error ? ", error);
-                }
-            });
-
+            console.log("Stating ? 1?!?!?!?!?!??!?!!?");
+            $location.url('/login');
         }
 
 
