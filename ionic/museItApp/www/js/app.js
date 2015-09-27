@@ -32,7 +32,12 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
+      .state('login', {
+          url: '/login',
+          templateUrl: 'templates/login.html',
+          controller: 'LoginCtrl'
 
+      })
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',
@@ -52,15 +57,7 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
     }
   })
 
-      .state('tab.login', {
-          url: '/login',
-          views: {
-              'tab-dash': {
-                  templateUrl: 'templates/login.html',
-                  controller: 'LoginCtrl'
-              }
-          }
-      })
+
 
   .state('tab.chats', {
       url: '/chats',

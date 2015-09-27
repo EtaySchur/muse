@@ -26,11 +26,11 @@ angular.module('starter.controllers', [])
     .controller('MainCtrl', function ($scope, $ionicModal, ElasticSearchService, $rootScope, VideosService, $log, $location) {
 
 
-        ElasticSearchService.login("FuadUser35", "avinimni").then(function (result) {
-            console.log("This is my login result ", result);
-            console.log("User Log in ", $rootScope.currentUser);
-            $scope.updateVideos();
-        });
+//        ElasticSearchService.login("FuadUser35", "avinimni").then(function (result) {
+//            console.log("This is my login result ", result);
+//            console.log("User Log in ", $rootScope.currentUser);
+//            $scope.updateVideos();
+//        });
 
         $rootScope.initCurrentUserData = function () {
             if (navigator.geolocation) {
@@ -81,6 +81,7 @@ angular.module('starter.controllers', [])
 
         Parse.initialize("La50BQc9X1fu8ogp1KwHSRzSc3Tw3SfkpDQTVWsc", "h6aicGGyly7OBgujsLD3aPIPWP7dmhpymYo2xbcw");
         var point;
+        Parse.User.logOut();
         var currentUser = Parse.User.current();
         console.log("I HAVE CURRENT USER ? ", currentUser);
         if (currentUser) {
@@ -89,9 +90,7 @@ angular.module('starter.controllers', [])
             console.log("live video ? ", currentUser.get("liveVideo"));
         } else {
             console.log("Stating ? 1?!?!?!?!?!??!?!!?");
-            $location.url('/tab/login');
-
-
+            $location.url('/login');
         }
 
 
@@ -194,37 +193,40 @@ angular.module('starter.controllers', [])
             var index = null;
 
 
-            if ($rootScope.currentUser.playList == undefined) {
-                $rootScope.currentUser.playList = [];
+            if ($rootScope.currentParseUser.attributes.favourites == undefined) {
+                $rootScope.currentParseUser.attributes.favourites = [];
             }
 
 
-            for (var i = 0; i < $rootScope.currentUser.playList.length; i++) {
-                if ($rootScope.currentUser.playList[i].id == video.id) {
+            for (var i = 0; i < $rootScope.currentParseUser.attributes.favourites.length; i++) {
+                if ($rootScope.currentParseUser.attributes.favourites[i].id == video.id) {
                     found = true;
                     index = i;
+                    console.log("SPLICING!!!!!!!!");
                 }
             }
 
             if (found) {
-                $rootScope.currentUser.playList.splice(index, 1);
+                $rootScope.currentParseUser.attributes.favourites.splice(index, 1);
             } else {
-                $rootScope.currentUser.playList.push(video);
+                console.log("Adding");
+                $rootScope.currentParseUser.attributes.favourites.push(video);
+                console.log($rootScope.currentParseUser);
             }
 
-
+            $rootScope.currentParseUser.save();
 //            ElasticSearchService.updateObject($rootScope.currentUser).then(function(result){
 //                console.log("Update Playlist result ",result);
 //            });
         }
 
         $scope.isFavo = function (video) {
-            for (var i = 0; i < $rootScope.currentUser.playList.length; i++) {
-                if ($rootScope.currentUser.playList[i].id == video.id) {
+
+            for (var i = 0; i < $rootScope.currentParseUser.attributes.favourites.length; i++) {
+                if ($rootScope.currentParseUser.attributes.favourites[i].id == video.id) {
                     return true;
                 }
             }
-
             return false;
         }
 
