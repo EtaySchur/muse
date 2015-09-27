@@ -146,6 +146,17 @@ app.directive('youtube', function($window , $rootScope) {
 
             });
 
+            scope.$watch('height + width', function(newValue, oldValue) {
+                if (newValue == oldValue) {
+                    return;
+                }
+
+                player.setSize(scope.width, scope.height);
+
+            });
+
+
+
             $window.onYouTubeIframeAPIReady = function() {
                 player = new YT.Player(element.children()[0], {
 
@@ -168,3 +179,5 @@ app.directive('youtube', function($window , $rootScope) {
         },
     }
 });
+
+
