@@ -24,7 +24,9 @@ angular.module('starter.controllers', [])
     })
 
     .controller('MainCtrl', function ($scope, $ionicModal, ElasticSearchService, $rootScope, VideosService, $log, $location) {
-
+        $scope.trustSrc = function(src) {
+            return $sce.trustAsResourceUrl(src);
+        }
 
         ElasticSearchService.login("FuadUser35", "avinimni").then(function (result) {
             console.log("This is my login result ", result);
