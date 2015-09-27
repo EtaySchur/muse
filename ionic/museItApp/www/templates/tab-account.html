@@ -1,9 +1,16 @@
 <ion-view view-title="Account">
   <ion-content>
     <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
+
+        <div class="list">
+            <div class="item range range-positive">
+                <span> Range </span>
+                <i class="icon ion-ios-sunny-outline"></i>
+                <input  ng-change="updateSetting()" type="range" name="volume" min="0" max="100" ng-model="currentUser.searchRangeDistance">
+                <i class="icon ion-ios-sunny"></i>
+                <span> {{currentUser.searchRangeDistance}} km </span>
+            </div>
+        </div>
     </ion-list>
   </ion-content>
 </ion-view>

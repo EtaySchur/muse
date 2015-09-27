@@ -83,8 +83,17 @@ app.factory('ElasticSearchService', ['$window', '$rootScope', '$log', '$rootScop
                 if($rootScope.currentUser.userLocation == undefined){
                     $rootScope.currentUser.userLocation = {};
                 }
+
                 $rootScope.currentUser.userLocation.lat = position.coords.latitude;
                 $rootScope.currentUser.userLocation.lon = position.coords.longitude;
+
+                if($rootScope.currentUser.searchRangeDistance == undefined){
+                    $rootScope.currentUser.searchRangeDistance = 10;
+                }
+
+                if($rootScope.currentUser.playList == undefined){
+                    $rootScope.currentUser.playList = [];
+                }
                 deferred.resolve($rootScope.currentUser);
                 es.update({
                     index: INDEX,

@@ -5,14 +5,21 @@ angular.module('starter.controllers', [])
     })
 
 .controller('MainCtrl', function($scope , $ionicModal , ElasticSearchService , $rootScope , VideosService , $log) {
-        ElasticSearchService.login("FuadUser55" , "avinimni").then(function(result){
+        ElasticSearchService.login("FuadUser35" , "avinimni").then(function(result){
             console.log("This is my login result ",result);
             console.log("User Log in ",$rootScope.currentUser);
             $scope.updateVideos();
         });
 
+        $scope.updateSetting = function(){
+            console.log($rootScope.currentUser.searchRangeDistance);
+            ElasticSearchService.updateObject($rootScope.currentUser).then(function(result){
+                console.log("Update Settings ",result);
+            });
+        }
+
         $scope.updateVideos = function() {
-            ElasticSearchService.searchRangedVideos("200km" , $rootScope.currentUser.userLocation.lat , $rootScope.currentUser.userLocation.lon).then(function(result){
+            ElasticSearchService.searchRangedVideos($rootScope.currentUser.searchRangeDistance+"km" , $rootScope.currentUser.userLocation.lat , $rootScope.currentUser.userLocation.lon).then(function(result){
                 console.log("This is my service result (All Users With Videos )" ,result);
                 $rootScope.allUserWithVideos = result;
             });
