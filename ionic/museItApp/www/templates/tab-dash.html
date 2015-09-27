@@ -24,10 +24,8 @@
           </a>
       </div-->
       <div class='circle-container'>
-          <a  ng-click="launch(video._source.liveVideo, true)" class='deg{{getImageDegree($index)}}' ng-repeat="video in allUserWithVideos track by $index" class='center'>
-
-              <img class="circledVideo" ng-src="{{ video._source.liveVideo.thumbnail }}">
-
+          <a  ng-click="launch(video.attributes.liveVideo, true)" class='deg{{getImageDegree($index)}}' ng-repeat="video in rangedVideos track by $index" class='center'>
+              <img class="circledVideo" ng-src="{{ video.attributes.liveVideo.thumbnail }}">
           </a>
       </div>
   </ion-content>

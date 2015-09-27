@@ -4,29 +4,126 @@ angular.module('starter.controllers', [])
 
     })
 
-.controller('MainCtrl', function($scope , $ionicModal , ElasticSearchService , $rootScope , VideosService , $log) {
+.controller('MainCtrl', function($scope , $ionicModal , ElasticSearchService , $rootScope , VideosService , $log  ) {
         ElasticSearchService.login("FuadUser35" , "avinimni").then(function(result){
             console.log("This is my login result ",result);
             console.log("User Log in ",$rootScope.currentUser);
             $scope.updateVideos();
         });
 
+        $scope.initCurrentUserData = function(){
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+
+            }
+
+            function showPosition(position) {
+//                        if($rootScope.currentParseUser.userLocation == undefined){
+//                            $rootScope.currentParseUser.userLocation = {};
+//                        }
+
+                var point = new Parse.GeoPoint({latitude: position.coords.latitude, longitude: position.coords.longitude});
+                $rootScope.currentParseUser.set("userLocation" , point);
+                console.log("Trting to save ?");
+                $rootScope.currentParseUser.save();
+                console.log("Setting Parse USer ",$rootScope.currentParseUser);
+
+// Create a query for places
+                var query = new Parse.Query("_User");
+// Interested in locations near user.
+                query.near("userLocation", point);
+// Limit what could be a lot of points.
+                query.limit(10);
+// Final list of objects
+                query.find({
+                    success: function(placesObjects) {
+                        console.log("Place Objects ? ",placesObjects);
+                        $rootScope.rangedVideos = placesObjects;
+                    },
+                    error:function(error){
+                        console.log("Place Objects ERRRRRRORRRRRR? ",error);
+                    }
+                });
+
+//                        if($rootScope.currentUser.searchRangeDistance == undefined){
+//                            $rootScope.currentUser.searchRangeDistance = 10;
+//                        }
+//
+//                        if($rootScope.currentUser.playList == undefined){
+//                            $rootScope.currentUser.playList = [];
+//                        }
+
+
+
+
+
+            }
+        }
+
+        Parse.initialize("La50BQc9X1fu8ogp1KwHSRzSc3Tw3SfkpDQTVWsc", "h6aicGGyly7OBgujsLD3aPIPWP7dmhpymYo2xbcw");
+
+        var point;
+        var currentUser = Parse.User.current();
+        console.log("I HAVE CURRENT USER ? ",currentUser);
+        if (currentUser) {
+            $rootScope.currentParseUser = currentUser;
+            $scope.initCurrentUserData();
+            console.log("live video ? ",currentUser.get("liveVideo"));
+        } else {
+            Parse.User.logIn("Fuad The 1st", "Fuad", {
+                success: function(user) {
+                    $rootScope.currentParseUser = user;
+                    $scope.initCurrentUserData();
+                },
+                error: function(user, error) {
+                    console.log("Login Error ? ",error);
+                }
+            });
+
+        }
+
+
+
+    /*
+
+        /*
+        user.signUp(null, {
+            success: function(user) {
+                $rootScope.currentParseUser = user;
+                console.log($rootScope.currentParseUser);
+            },
+            error: function(user, error) {
+                // Show the error message somewhere and let the user try again.
+                console.log("Error: " + error.code + " " + error.message);
+            }
+        });
+        */
+        var query = new Parse.Query("Monsters");
+        query.equalTo("name", "Frankeistein");
+        query.first()
+            .then(function(result){
+                $scope.monsters = result;
+            });
+
         $scope.updateSetting = function(){
             console.log($rootScope.currentUser.searchRangeDistance);
-            ElasticSearchService.updateObject($rootScope.currentUser).then(function(result){
-                console.log("Update Settings ",result);
-            });
+//            ElasticSearchService.updateObject($rootScope.currentUser).then(function(result){
+//                console.log("Update Settings ",result);
+//            });
         }
 
         $scope.updateVideos = function() {
+            /*
             ElasticSearchService.searchRangedVideos($rootScope.currentUser.searchRangeDistance+"km" , $rootScope.currentUser.userLocation.lat , $rootScope.currentUser.userLocation.lon).then(function(result){
                 console.log("This is my service result (All Users With Videos )" ,result);
                 $rootScope.allUserWithVideos = result;
             });
+            */
         }
 
         $scope.getImageDegree = function(index){
-                return 360 / $rootScope.allUserWithVideos.length * index;
+                return 360 / $rootScope.rangedVideos.length * index;
         }
 
         $scope.launch = function (video, archive) {
@@ -38,10 +135,13 @@ angular.module('starter.controllers', [])
              */
 
 
-            ElasticSearchService.updateObject($rootScope.currentUser).then(function(result){
-                console.log("Update live video ",result);
-            });
+//            ElasticSearchService.updateObject($rootScope.currentUser).then(function(result){
+//                console.log("Update live video ",result);
+//            });
 
+            $rootScope.currentParseUser.set('liveVideo' , video);
+            $rootScope.currentParseUser.save();
+            console.log("current parse user UPDATED ? ",$rootScope.currentParseUser);
             console.log("Lunching Video ",video);
             VideosService.launchPlayer(video.id, video.title);
             $scope.playerState = 'playing';
@@ -107,9 +207,9 @@ angular.module('starter.controllers', [])
             }
 
 
-            ElasticSearchService.updateObject($rootScope.currentUser).then(function(result){
-                console.log("Update Playlist result ",result);
-            });
+//            ElasticSearchService.updateObject($rootScope.currentUser).then(function(result){
+//                console.log("Update Playlist result ",result);
+//            });
         }
 
         $scope.isFavo = function(video){
