@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ae525a9-2892-4351-b830-59897ecd74d8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic/museItApp/www/js/controllers.js" afterPath="$PROJECT_DIR$/ionic/museItApp/www/js/controllers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic/museItApp/www/index.html" afterPath="$PROJECT_DIR$/ionic/museItApp/www/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic/museItApp/www/templates/tab-chats.html" afterPath="$PROJECT_DIR$/ionic/museItApp/www/templates/tab-chats.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -47,11 +47,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tab-chats.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="tab-chats.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ionic/museItApp/www/templates/tab-chats.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6718213" vertical-offset="207" max-vertical-offset="1035">
-              <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+            <state vertical-scroll-proportion="-7.90625" vertical-offset="0" max-vertical-offset="989">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="chat-detail.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ionic/museItApp/www/templates/chat-detail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="460">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -79,22 +89,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="elasticSearchSrv.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ionic/museItApp/www/js/services/elasticSearchSrv.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.1" vertical-offset="1710" max-vertical-offset="3588">
-              <caret line="81" column="7" selection-start-line="81" selection-start-column="7" selection-end-line="115" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ionic/museItApp/www/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.375" vertical-offset="0" max-vertical-offset="2001">
-              <caret line="20" column="38" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
-              <folding />
+            <state vertical-scroll-proportion="0.8117647" vertical-offset="1173" max-vertical-offset="2047">
+              <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -165,9 +167,9 @@
         <option value="$PROJECT_DIR$/ionic/museItApp/www/js/vendor/parse-angular-patch/parse/parse.js" />
         <option value="$PROJECT_DIR$/ionic/museItApp/www/js/vendor/parse/parse.js" />
         <option value="$PROJECT_DIR$/ionic/museItApp/www/js/app.js" />
-        <option value="$PROJECT_DIR$/ionic/museItApp/www/index.html" />
         <option value="$PROJECT_DIR$/ionic/museItApp/www/js/controllers.js" />
         <option value="$PROJECT_DIR$/ionic/museItApp/www/templates/tab-chats.html" />
+        <option value="$PROJECT_DIR$/ionic/museItApp/www/index.html" />
       </list>
     </option>
   </component>
@@ -872,7 +874,7 @@
       <created>1443083874085</created>
       <updated>1443083874085</updated>
       <workItem from="1443083874733" duration="1289000" />
-      <workItem from="1443199245345" duration="59495000" />
+      <workItem from="1443199245345" duration="60481000" />
     </task>
     <task id="LOCAL-00001" summary="start">
       <created>1443307634878</created>
@@ -914,17 +916,21 @@
       <created>1443365932727</created>
       <updated>1443365932727</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="try to fix you tube">
+      <created>1443366454538</created>
+      <updated>1443366454538</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60784000" />
+    <option name="totallyTimeSpent" value="61770000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29581994" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29581994" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -976,7 +982,8 @@
     <MESSAGE value="Login ...&#10;" />
     <MESSAGE value="Adding Favo's&#10;" />
     <MESSAGE value="add parse local&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="add parse local&#10;" />
+    <MESSAGE value="try to fix you tube" />
+    <option name="LAST_COMMIT_MESSAGE" value="try to fix you tube" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1180,14 +1187,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ionic/museItApp/www/templates/chat-detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="903">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example/js/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.133333" vertical-offset="621" max-vertical-offset="2622">
@@ -1336,14 +1335,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ionic/museItApp/www/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.375" vertical-offset="0" max-vertical-offset="2001">
-          <caret line="20" column="38" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ionic/museItApp/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2691">
@@ -1360,11 +1351,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ionic/museItApp/www/templates/chat-detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="903">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ionic/museItApp/www/templates/tab-chats.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6718213" vertical-offset="207" max-vertical-offset="1035">
-          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+        <state vertical-scroll-proportion="-7.90625" vertical-offset="0" max-vertical-offset="989">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ionic/museItApp/www/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8117647" vertical-offset="1173" max-vertical-offset="2047">
+          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
