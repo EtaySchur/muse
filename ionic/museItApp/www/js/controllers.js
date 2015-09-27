@@ -1,17 +1,38 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope , $rootScope , VideosService) {
+    .controller('DashCtrl', function ($scope, $rootScope, VideosService) {
 
     })
+    .controller('LoginCtrl', function ($scope, $rootScope, VideosService , $rootScope , $location) {
+        $scope.userName = "Fuad The 1st";
+        $scope.password = "Fuad";
 
-.controller('MainCtrl', function($scope , $ionicModal , ElasticSearchService , $rootScope , VideosService , $log  ) {
-        ElasticSearchService.login("FuadUser35" , "avinimni").then(function(result){
-            console.log("This is my login result ",result);
-            console.log("User Log in ",$rootScope.currentUser);
+        $scope.parseLogin = function (userName, password) {
+            Parse.User.logIn(userName, password, {
+                success: function (user) {
+                    $rootScope.currentParseUser = user;
+                    $rootScope.initCurrentUserData();
+                    $location.url('/tab/chats');
+
+                },
+                error: function (user, error) {
+                    console.log("Login Error ? ", error);
+                }
+            });
+
+        }
+    })
+
+    .controller('MainCtrl', function ($scope, $ionicModal, ElasticSearchService, $rootScope, VideosService, $log, $location) {
+
+
+        ElasticSearchService.login("FuadUser35", "avinimni").then(function (result) {
+            console.log("This is my login result ", result);
+            console.log("User Log in ", $rootScope.currentUser);
             $scope.updateVideos();
         });
 
-        $scope.initCurrentUserData = function(){
+        $rootScope.initCurrentUserData = function () {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
             } else {
@@ -24,10 +45,10 @@ angular.module('starter.controllers', [])
 //                        }
 
                 var point = new Parse.GeoPoint({latitude: position.coords.latitude, longitude: position.coords.longitude});
-                $rootScope.currentParseUser.set("userLocation" , point);
+                $rootScope.currentParseUser.set("userLocation", point);
                 console.log("Trting to save ?");
                 $rootScope.currentParseUser.save();
-                console.log("Setting Parse USer ",$rootScope.currentParseUser);
+                console.log("Setting Parse USer ", $rootScope.currentParseUser);
 
 // Create a query for places
                 var query = new Parse.Query("_User");
@@ -37,12 +58,12 @@ angular.module('starter.controllers', [])
                 query.limit(10);
 // Final list of objects
                 query.find({
-                    success: function(placesObjects) {
-                        console.log("Place Objects ? ",placesObjects);
+                    success: function (placesObjects) {
+                        console.log("Place Objects ? ", placesObjects);
                         $rootScope.rangedVideos = placesObjects;
                     },
-                    error:function(error){
-                        console.log("Place Objects ERRRRRRORRRRRR? ",error);
+                    error: function (error) {
+                        console.log("Place Objects ERRRRRRORRRRRR? ", error);
                     }
                 });
 
@@ -55,75 +76,64 @@ angular.module('starter.controllers', [])
 //                        }
 
 
-
-
-
             }
         }
 
         Parse.initialize("La50BQc9X1fu8ogp1KwHSRzSc3Tw3SfkpDQTVWsc", "h6aicGGyly7OBgujsLD3aPIPWP7dmhpymYo2xbcw");
-
         var point;
         var currentUser = Parse.User.current();
-        console.log("I HAVE CURRENT USER ? ",currentUser);
+        console.log("I HAVE CURRENT USER ? ", currentUser);
         if (currentUser) {
             $rootScope.currentParseUser = currentUser;
-            $scope.initCurrentUserData();
-            console.log("live video ? ",currentUser.get("liveVideo"));
+            $rootScope.initCurrentUserData();
+            console.log("live video ? ", currentUser.get("liveVideo"));
         } else {
-            Parse.User.logIn("Fuad The 1st", "Fuad", {
-                success: function(user) {
-                    $rootScope.currentParseUser = user;
-                    $scope.initCurrentUserData();
-                },
-                error: function(user, error) {
-                    console.log("Login Error ? ",error);
-                }
-            });
+            console.log("Stating ? 1?!?!?!?!?!??!?!!?");
+            $location.url('/tab/login');
+
 
         }
 
 
-
-    /*
-
         /*
-        user.signUp(null, {
-            success: function(user) {
-                $rootScope.currentParseUser = user;
-                console.log($rootScope.currentParseUser);
-            },
-            error: function(user, error) {
-                // Show the error message somewhere and let the user try again.
-                console.log("Error: " + error.code + " " + error.message);
-            }
-        });
-        */
+
+         /*
+         user.signUp(null, {
+         success: function(user) {
+         $rootScope.currentParseUser = user;
+         console.log($rootScope.currentParseUser);
+         },
+         error: function(user, error) {
+         // Show the error message somewhere and let the user try again.
+         console.log("Error: " + error.code + " " + error.message);
+         }
+         });
+         */
         var query = new Parse.Query("Monsters");
         query.equalTo("name", "Frankeistein");
         query.first()
-            .then(function(result){
+            .then(function (result) {
                 $scope.monsters = result;
             });
 
-        $scope.updateSetting = function(){
+        $scope.updateSetting = function () {
             console.log($rootScope.currentUser.searchRangeDistance);
 //            ElasticSearchService.updateObject($rootScope.currentUser).then(function(result){
 //                console.log("Update Settings ",result);
 //            });
         }
 
-        $scope.updateVideos = function() {
+        $scope.updateVideos = function () {
             /*
-            ElasticSearchService.searchRangedVideos($rootScope.currentUser.searchRangeDistance+"km" , $rootScope.currentUser.userLocation.lat , $rootScope.currentUser.userLocation.lon).then(function(result){
-                console.log("This is my service result (All Users With Videos )" ,result);
-                $rootScope.allUserWithVideos = result;
-            });
-            */
+             ElasticSearchService.searchRangedVideos($rootScope.currentUser.searchRangeDistance+"km" , $rootScope.currentUser.userLocation.lat , $rootScope.currentUser.userLocation.lon).then(function(result){
+             console.log("This is my service result (All Users With Videos )" ,result);
+             $rootScope.allUserWithVideos = result;
+             });
+             */
         }
 
-        $scope.getImageDegree = function(index){
-                return 360 / $rootScope.rangedVideos.length * index;
+        $scope.getImageDegree = function (index) {
+            return 360 / $rootScope.rangedVideos.length * index;
         }
 
         $scope.launch = function (video, archive) {
@@ -139,10 +149,10 @@ angular.module('starter.controllers', [])
 //                console.log("Update live video ",result);
 //            });
 
-            $rootScope.currentParseUser.set('liveVideo' , video);
+            $rootScope.currentParseUser.set('liveVideo', video);
             $rootScope.currentParseUser.save();
-            console.log("current parse user UPDATED ? ",$rootScope.currentParseUser);
-            console.log("Lunching Video ",video);
+            console.log("current parse user UPDATED ? ", $rootScope.currentParseUser);
+            console.log("Lunching Video ", video);
             VideosService.launchPlayer(video.id, video.title);
             $scope.playerState = 'playing';
             if (archive) {
@@ -152,18 +162,16 @@ angular.module('starter.controllers', [])
         };
 
 
-
     })
 
-.controller('ChatsCtrl', function($scope, Chats , $log , VideosService , $http , $rootScope , $ionicModal , es , ElasticSearchService) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
+    .controller('ChatsCtrl', function ($scope, Chats, $log, VideosService, $http, $rootScope, $ionicModal, es, ElasticSearchService) {
+        // With the new view caching in Ionic, Controllers are only called
+        // when they are recreated or on app start, instead of every page change.
+        // To listen for when this page is active (for example, to refresh data),
+        // listen for the $ionicView.enter event:
+        //
+        //$scope.$on('$ionicView.enter', function(e) {
+        //});
 
 
         $scope.nextPageToken = '';
@@ -171,38 +179,36 @@ angular.module('starter.controllers', [])
         $scope.loading = false;
 
 
-
-
         function init() {
             $scope.query = 'guy gerber';
             $scope.youtube = VideosService.getYoutube();
             $scope.results = VideosService.getResults();
-            console.log("This is the resultssss...." , $scope.youtube);
+            console.log("This is the resultssss....", $scope.youtube);
             $scope.history = VideosService.getHistory();
         }
 
         init();
 
-        $scope.addVideoToFav = function(video){
+        $scope.addVideoToFav = function (video) {
             var found = false;
             var index = null;
 
 
-            if($rootScope.currentUser.playList == undefined){
+            if ($rootScope.currentUser.playList == undefined) {
                 $rootScope.currentUser.playList = [];
             }
 
 
-            for(var i = 0 ; i < $rootScope.currentUser.playList.length ; i++){
-                if($rootScope.currentUser.playList[i].id == video.id){
-                    found =  true;
+            for (var i = 0; i < $rootScope.currentUser.playList.length; i++) {
+                if ($rootScope.currentUser.playList[i].id == video.id) {
+                    found = true;
                     index = i;
                 }
             }
 
-            if(found){
-                $rootScope.currentUser.playList.splice( index , 1);
-            }else{
+            if (found) {
+                $rootScope.currentUser.playList.splice(index, 1);
+            } else {
                 $rootScope.currentUser.playList.push(video);
             }
 
@@ -212,17 +218,15 @@ angular.module('starter.controllers', [])
 //            });
         }
 
-        $scope.isFavo = function(video){
-            for(var i = 0 ; i < $rootScope.currentUser.playList.length ; i++){
-                if($rootScope.currentUser.playList[i].id == video.id){
+        $scope.isFavo = function (video) {
+            for (var i = 0; i < $rootScope.currentUser.playList.length; i++) {
+                if ($rootScope.currentUser.playList[i].id == video.id) {
                     return true;
                 }
             }
 
             return false;
         }
-
-
 
 
         $scope.search = function (isNewQuery) {
@@ -239,7 +243,7 @@ angular.module('starter.controllers', [])
                     q: this.query
                 }
             })
-                .success( function (data) {
+                .success(function (data) {
                     if (data.items.length === 0) {
                         $scope.label = 'No results were found!';
                     }
@@ -247,10 +251,10 @@ angular.module('starter.controllers', [])
                     $scope.nextPageToken = data.nextPageToken;
                     $log.info(data);
                 })
-                .error( function () {
+                .error(function () {
                     $log.info('Search error');
                 })
-                .finally( function () {
+                .finally(function () {
                     $scope.loadMoreButton.stopSpin();
                     $scope.loadMoreButton.setDisabled(false);
                     $scope.loading = false;
@@ -258,18 +262,18 @@ angular.module('starter.controllers', [])
             ;
         };
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-})
+        $scope.chats = Chats.all();
+        $scope.remove = function (chat) {
+            Chats.remove(chat);
+        };
+    })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
+    .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {
+        $scope.chat = Chats.get($stateParams.chatId);
+    })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-});
+    .controller('AccountCtrl', function ($scope) {
+        $scope.settings = {
+            enableFriends: true
+        };
+    });

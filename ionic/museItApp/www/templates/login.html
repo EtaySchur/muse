@@ -1,0 +1,26 @@
+
+
+<ion-view view-title="Account">
+    <ion-content>
+        <div  class="list">
+            <label class="item item-input">
+                <span class="input-label">Username</span>
+                <input ng-model="userName" type="text">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Password</span>
+                <input ng-model="password" type="password">
+            </label>
+        </div>
+        <div class="padding">
+            <button ng-click="parseLogin(userName , password)" class="button button-block button-positive">
+                Login
+            </button>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-calm">
+                Sign Up
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

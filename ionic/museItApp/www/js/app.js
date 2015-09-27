@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 'elasticsearch'  , 'parse-angular'])
+var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services' , 'elasticsearch'  , 'parse-angular' , 'ui.router'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -51,6 +51,16 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
       }
     }
   })
+
+      .state('tab.login', {
+          url: '/login',
+          views: {
+              'tab-dash': {
+                  templateUrl: 'templates/login.html',
+                  controller: 'LoginCtrl'
+              }
+          }
+      })
 
   .state('tab.chats', {
       url: '/chats',
