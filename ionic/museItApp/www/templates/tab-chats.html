@@ -12,27 +12,26 @@
       </div>
       <div style="text-align: center">
           <youtube width="100" height="100" videoid="{{currentVideo.id}}"></youtube>
-
       </div>
       <div class="list">
 
-          <a ng-repeat="video in results track by $index" class="item item-thumbnail-left">
+          <a ng-click="setCurrentVideo(video)" ng-repeat="video in results track by $index" class="item item-thumbnail-left">
               <!--youtube id="{{current.id}}" width="{{width}}" height="{{height}}" current-time="time" controls="{{current.showControls}}"></youtube-->
               <img ng-src="{{ video.thumbnail }}">
               <h2>{{video.title}}</h2>
               <p>{{video.description}}</p>
-              <button  ng-click="setCurrentVideo(video)" class="button button-outline button-positive">
-                  <i class="icon ion-play"></i>
-              </button>
-              <button ng-hide="youtube.player.state == 'pause'" ng-click="youtube.player.pauseVideo();youtube.player.state = 'pause'" class="button button-outline button-positive">
-                  <i class="icon ion-pause"></i>
-              </button>
-              <button ng-show="youtube.player.state == 'pause'" ng-click="youtube.player.playVideo();youtube.player.state = 'playing'" class="button button-outline button-positive">
-                  <i class="icon ion-pause"></i>
-              </button>
-              <button ng-class="{'button-outline': !isFavo(video)}" ng-click="addVideoToFav(video)" class="button  button-positive">
-                  <i class="icon  ion-android-star"></i>
-              </button>
+              <div ng-show="video.id == currentVideo.id">
+                  <button    ng-click="playVideo(video)" class="button button-outline button-positive">
+                      <i class="icon ion-play"></i>
+                  </button>
+                  <button ng-click="pauseVideo(video)" class="button button-outline button-positive">
+                      <i class="icon ion-pause"></i>
+                  </button>
+                  <button ng-class="{'button-outline': !isFavo(video)}" ng-click="addVideoToFav(video)" class="button  button-positive">
+                      <i class="icon  ion-android-star"></i>
+                  </button>
+              </div>
+
 
           </a>
       </div>

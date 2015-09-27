@@ -130,10 +130,22 @@ app.directive('youtube', function($window , $rootScope) {
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
             $rootScope.$on('changeVideo' , function(event , data){
-               console.log("BROADCASTING ",data);
                 scope.videoid = data.id;
-                player.cueVideoById(scope.videoid);
             });
+
+            $rootScope.$on('playVideo' , function(event , data){
+                player.playVideo();
+            });
+
+            $rootScope.$on('pauseVideo' , function(event , data){
+                player.pauseVideo();
+            });
+
+            $rootScope.$on('stopVideo' , function(event , data){
+                player.seekTo(0);
+                player.stopVideo();
+            });
+
 
             var player;
 
@@ -141,7 +153,7 @@ app.directive('youtube', function($window , $rootScope) {
                 if (newValue == oldValue) {
                     return;
                 }
-
+                console.log("IM WATChING !!!");
                 player.cueVideoById(scope.videoid);
 
             });

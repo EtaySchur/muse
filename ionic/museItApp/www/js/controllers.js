@@ -197,6 +197,13 @@ angular.module('starter.controllers', [])
         init();
 
 
+    $scope.playVideo = function(video){
+        $rootScope.$broadcast('playVideo' , $scope.currentVideo);
+    }
+
+    $scope.pauseVideo = function(video){
+        $rootScope.$broadcast('pauseVideo' , $scope.currentVideo);
+    }
 
 
     $scope.setCurrentVideo = function(video){
